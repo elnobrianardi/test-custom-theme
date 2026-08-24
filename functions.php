@@ -182,3 +182,29 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
+
+/**
+ * 5 Star Eats AEO Hub (Q3 2026 pilot).
+ *
+ * Content datasets and JSON-LD/hreflang builders for the five hub
+ * page templates: page-5-star-eats.php, page-how-it-works.php,
+ * page-faq.php, page-winners-2025.php, page-awards.php.
+ */
+require get_template_directory() . '/inc/five-star-eats-winners.php';
+require get_template_directory() . '/inc/five-star-eats-content.php';
+require get_template_directory() . '/inc/five-star-eats-schema.php';
+
+/**
+ * Enqueue hub styles only on the five 5 Star Eats pages.
+ */
+function five_star_eats_scripts() {
+	if ( is_page( five_star_eats_page_slugs() ) ) {
+		wp_enqueue_style(
+			'five-star-eats',
+			get_template_directory_uri() . '/css/5se.css',
+			array(),
+			_S_VERSION
+		);
+	}
+}
+add_action( 'wp_enqueue_scripts', 'five_star_eats_scripts' );
