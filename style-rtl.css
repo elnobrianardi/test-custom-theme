@@ -650,6 +650,8 @@ textarea {
 .main-navigation {
 	display: block;
 	width: 100%;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .main-navigation ul {

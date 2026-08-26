@@ -193,6 +193,7 @@ if ( class_exists( 'WooCommerce' ) ) {
 require get_template_directory() . '/inc/five-star-eats-winners.php';
 require get_template_directory() . '/inc/five-star-eats-content.php';
 require get_template_directory() . '/inc/five-star-eats-schema.php';
+require get_template_directory() . '/inc/five-star-eats-seo.php';
 
 /**
  * Enqueue hub styles only on the five 5 Star Eats pages.
@@ -204,6 +205,17 @@ function five_star_eats_scripts() {
 			get_template_directory_uri() . '/css/5se.css',
 			array(),
 			_S_VERSION
+		);
+	}
+
+	// Accordion fallback — only on the FAQ page, only when UIKit JS is absent.
+	if ( is_page( 'faq' ) && ! wp_script_is( 'uikit', 'enqueued' ) && ! wp_script_is( 'uikit', 'registered' ) ) {
+		wp_enqueue_script(
+			'fse-accordion',
+			get_template_directory_uri() . '/js/fse-accordion.js',
+			array(),
+			_S_VERSION,
+			true
 		);
 	}
 }

@@ -64,6 +64,11 @@ function five_star_eats_print_jsonld( $data ) {
 /**
  * Print self-referencing hreflang tags for the current hub page.
  *
+ * In production on grab.com, hreflang tags are added via the repo's
+ * hreflang.csv file (see /hreflang.csv in this theme). This PHP hook
+ * serves as the fallback for local dev and staging environments where
+ * the CSV-based pipeline is not active.
+ *
  * @return void
  */
 function five_star_eats_hreflang() {

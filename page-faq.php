@@ -3,9 +3,8 @@
  * 5 Star Eats FAQ template.
  *
  * Automatically applied to the page with slug "faq".
- * Renders the Q&As from inc/five-star-eats-content.php as an
- * accordion (native details/summary here; swap for the grab.com UIKit
- * accordion component in production). The same data feeds the
+ * Renders the Q&As from inc/five-star-eats-content.php as a
+ * UIKit accordion (uk-accordion). The same data feeds the
  * FAQPage JSON-LD via inc/five-star-eats-schema.php.
  *
  * @package _s
@@ -29,19 +28,19 @@ get_header();
 			</p>
 		</section>
 
-		<div class="fse-accordion">
+		<ul class="fse-accordion" uk-accordion="multiple: true">
 			<?php foreach ( five_star_eats_faqs() as $index => $faq ) : ?>
-				<details class="fse-accordion-item" id="question-<?php echo esc_attr( (string) ( $index + 1 ) ); ?>"<?php echo 0 === $index ? ' open' : ''; ?>>
-					<summary class="fse-accordion-summary">
+				<li class="fse-accordion-item<?php echo 0 === $index ? ' uk-open' : ''; ?>" id="question-<?php echo esc_attr( (string) ( $index + 1 ) ); ?>">
+					<a class="uk-accordion-title fse-accordion-title" href>
 						<?php echo esc_html( $faq['q'] ); ?>
-						<span class="fse-accordion-icon" aria-hidden="true">+</span>
-					</summary>
-					<div class="fse-accordion-panel">
+						<span class="fse-accordion-icon" uk-accordion-icon aria-hidden="true"></span>
+					</a>
+					<div class="uk-accordion-content fse-accordion-content">
 						<?php echo esc_html( $faq['a'] ); ?>
 					</div>
-				</details>
+				</li>
 			<?php endforeach; ?>
-		</div>
+		</ul>
 
 		<nav class="fse-pagenav" aria-label="Related pages">
 			<a class="fse-button fse-button--ghost" href="<?php echo esc_url( home_url( '/how-it-works/' ) ); ?>">
