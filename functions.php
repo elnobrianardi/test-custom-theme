@@ -188,7 +188,7 @@ if ( class_exists( 'WooCommerce' ) ) {
  *
  * Content datasets and JSON-LD/hreflang builders for the five hub
  * page templates: page-5-star-eats.php, page-how-it-works.php,
- * page-faq.php, page-winners-2025.php, page-awards.php.
+ * page-faq.php, page-winners-2025.php, page-awards.php, page-company.php.
  */
 require get_template_directory() . '/inc/five-star-eats-winners.php';
 require get_template_directory() . '/inc/five-star-eats-content.php';

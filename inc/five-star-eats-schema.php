@@ -24,7 +24,7 @@
  * @return string[]
  */
 function five_star_eats_page_slugs() {
-	return array( '5-star-eats', 'how-it-works', 'faq', 'winners-2025', 'awards' );
+	return array( '5-star-eats', 'how-it-works', 'faq', 'winners-2025', 'awards', 'company', 'elno' );
 }
 
 /**
@@ -201,6 +201,21 @@ function five_star_eats_schema() {
 									),
 								),
 							)
+						),
+					),
+				)
+			);
+			break;
+
+		case 'company':
+			five_star_eats_print_jsonld(
+				array(
+					'@context' => 'https://schema.org',
+					'@graph'   => array(
+						five_star_eats_webpage_node(
+							$slug,
+							get_the_title(),
+							'Learn more about the Grab 5 Star Eats programme and our commitment to celebrating the best restaurants in Malaysia.'
 						),
 					),
 				)
