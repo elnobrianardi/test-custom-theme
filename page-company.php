@@ -21,7 +21,7 @@ get_header();
 		?>
 
 		<section class="fse-hero">
-			<h1 class="fse-title"><?php the_title(); ?></h1>
+			<?php _s_title( array( 'bg' => 'green' ) ); ?>
 			<p class="fse-lede">
 				Browse every edition of the Grab 5 Star Eats awards.
 			</p>
@@ -38,6 +38,7 @@ get_header();
 	<?php endwhile; ?>
 
 </main><!-- #main -->
+
 
 <?php
 get_footer();

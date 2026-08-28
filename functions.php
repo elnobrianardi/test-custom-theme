@@ -143,6 +143,10 @@ function _s_scripts() {
 
 	wp_enqueue_script( '_s-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
+	if ( is_404() ) {
+		wp_enqueue_style( 'theme-404', get_template_directory_uri() . '/css/404.css', array(), _S_VERSION );
+	}
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -196,16 +200,39 @@ require get_template_directory() . '/inc/five-star-eats-schema.php';
 require get_template_directory() . '/inc/five-star-eats-seo.php';
 
 /**
- * Enqueue hub styles only on the five 5 Star Eats pages.
+ * Enqueue hub styles only on the 5 Star Eats pages.
+ *
+ * A shared base stylesheet (5se-base.css) loads on every hub page, plus a
+ * page-specific stylesheet for pages that need extra styles.
  */
 function five_star_eats_scripts() {
 	if ( is_page( five_star_eats_page_slugs() ) ) {
 		wp_enqueue_style(
 			'five-star-eats',
-			get_template_directory_uri() . '/css/5se.css',
+			get_template_directory_uri() . '/css/5se-base.css',
 			array(),
 			_S_VERSION
 		);
+	}
+
+	// Page-specific stylesheets, keyed by slug => css file.
+	$page_styles = array(
+		'5-star-eats'  => '5se-signals.css',
+		'winners-2025' => '5se-winners.css',
+		'faq'          => '5se-accordion.css',
+		'awards'       => '5se-awards.css',
+		'company'      => '5se-company.css',
+	);
+
+	foreach ( $page_styles as $slug => $file ) {
+		if ( is_page( $slug ) ) {
+			wp_enqueue_style(
+				'five-star-eats-' . $slug,
+				get_template_directory_uri() . '/css/' . $file,
+				array( 'five-star-eats' ),
+				_S_VERSION
+			);
+		}
 	}
 
 	// Accordion fallback — only on the FAQ page, only when UIKit JS is absent.

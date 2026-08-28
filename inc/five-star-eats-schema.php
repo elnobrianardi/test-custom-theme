@@ -24,7 +24,7 @@
  * @return string[]
  */
 function five_star_eats_page_slugs() {
-	return array( '5-star-eats', 'how-it-works', 'faq', 'winners-2025', 'awards', 'company', 'elno' );
+	return array( '5-star-eats', 'how-it-works', 'faq', 'winners-2025', 'awards', 'company' );
 }
 
 /**

@@ -1,0 +1,47 @@
+/*
+ * 5 Star Eats — FAQ / accordion (UIKit uk-accordion).
+ * Used on page-faq.php and page-elno.php.
+ */
+
+.fse-accordion {
+	max-width: 720px;
+	margin: 2rem auto;
+	list-style: none;
+	padding: 0;
+}
+
+.fse-accordion-item {
+	border: 1px solid var(--fse-border);
+	border-radius: 10px;
+	margin-bottom: 0.75rem;
+	background-color: #fff;
+	scroll-margin-top: 5rem;
+}
+
+/* UIKit title — flex row with icon on the right */
+.fse-accordion-title {
+	display: flex !important;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1rem 1.25rem;
+	font-weight: 600;
+	cursor: pointer;
+	text-decoration: none;
+	color: inherit;
+}
+
+/* Toggle icon (chevron supplied by uk-accordion-icon) */
+.fse-accordion-icon {
+	flex: 0 0 auto;
+	width: 1.25rem;
+	height: 1.25rem;
+	color: var(--fse-green);
+	transition: transform 0.2s ease;
+}
+
+/* Content panel */
+.fse-accordion-content {
+	padding: 0 1.25rem 1.25rem;
+	color: var(--fse-muted);
+}

@@ -153,6 +153,60 @@ if ( ! function_exists( '_s_post_thumbnail' ) ) :
 	}
 endif;
 
+if ( ! function_exists( '_s_title' ) ) :
+	/**
+	 * Prints (or returns) the current post/page title wrapped in a styled heading.
+	 *
+	 * The background is applied via a CSS class built from the $bg argument
+	 * (e.g. 'green' -> 'title--bg-green', styled in the page stylesheet).
+	 *
+	 * @param array $args {
+	 *     Optional. Arguments to control the output.
+	 *     @type string $tag   Heading tag. Default 'h1'.
+	 *     @type string $class Base CSS class. Default 'fse-title'.
+	 *     @type string $bg    Background variant name. Default '' (none).
+	 *     @type string $title Title text. Defaults to get_the_title().
+	 *     @type bool   $echo  Whether to echo the markup. Default true.
+	 * }
+	 * @return string|void
+	 */
+	function _s_title( $args = array() ) {
+		$defaults = array(
+			'tag'   => 'h1',
+			'class' => 'fse-title',
+			'bg'    => '',
+			'title' => '',
+			'echo'  => true,
+		);
+
+		$args = wp_parse_args( $args, $defaults );
+
+		$title = $args['title'];
+		if ( '' === $title ) {
+			$title = get_the_title();
+		}
+
+		if ( '' === $title ) {
+			return;
+		}
+
+		$classes = array( $args['class'] );
+		if ( '' !== $args['bg'] ) {
+			$classes[] = 'title--bg-' . $args['bg'];
+		}
+
+		$tag   = tag_escape( $args['tag'] );
+		$class = esc_attr( implode( ' ', $classes ) );
+		$html  = '<' . $tag . ' class="' . $class . '">' . esc_html( $title ) . '</' . $tag . '>';
+
+		if ( $args['echo'] ) {
+			echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+
+		return $html;
+	}
+endif;
+
 if ( ! function_exists( 'wp_body_open' ) ) :
 	/**
 	 * Shim for sites older than 5.2.
