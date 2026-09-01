@@ -4,8 +4,8 @@
  *
  * Automatically applied to the page with slug "faq".
  * Renders the Q&As from inc/five-star-eats-content.php as a
- * UIKit accordion (uk-accordion). The same data feeds the
- * FAQPage JSON-LD via inc/five-star-eats-schema.php.
+ * vanilla-JS accordion (button + class toggle via js/fse-accordion.js).
+ * The same data feeds the FAQPage JSON-LD via inc/five-star-eats-schema.php.
  *
  * @package _s
  */
@@ -28,19 +28,31 @@ get_header();
 			</p>
 		</section>
 
-		<ul class="fse-accordion" uk-accordion="multiple: true">
+		<div class="fse-accordion" data-accordion>
 			<?php foreach ( five_star_eats_faqs() as $index => $faq ) : ?>
-				<li class="fse-accordion-item<?php echo 0 === $index ? ' uk-open' : ''; ?>" id="question-<?php echo esc_attr( (string) ( $index + 1 ) ); ?>">
-					<a class="uk-accordion-title fse-accordion-title" href>
-						<?php echo esc_html( $faq['q'] ); ?>
-						<span class="fse-accordion-icon" uk-accordion-icon aria-hidden="true"></span>
-					</a>
-					<div class="uk-accordion-content fse-accordion-content">
-						<?php echo esc_html( $faq['a'] ); ?>
+				<div class="fse-accordion-item<?php echo 0 === $index ? ' is-open' : ''; ?>" id="question-<?php echo esc_attr( (string) ( $index + 1 ) ); ?>">
+					<button
+						class="fse-accordion-summary"
+						type="button"
+						aria-expanded="<?php echo 0 === $index ? 'true' : 'false'; ?>"
+						aria-controls="question-panel-<?php echo esc_attr( (string) ( $index + 1 ) ); ?>"
+					>
+						<span class="fse-accordion-question"><?php echo esc_html( $faq['q'] ); ?></span>
+						<span class="fse-accordion-icon" aria-hidden="true"></span>
+					</button>
+					<div
+						class="fse-accordion-panel<?php echo 0 === $index ? '' : ' hidden'; ?>"
+						id="question-panel-<?php echo esc_attr( (string) ( $index + 1 ) ); ?>"
+						role="region"
+						aria-labelledby="question-<?php echo esc_attr( (string) ( $index + 1 ) ); ?>"
+					>
+						<div class="fse-accordion-panel-inner">
+							<?php echo esc_html( $faq['a'] ); ?>
+						</div>
 					</div>
-				</li>
+				</div>
 			<?php endforeach; ?>
-		</ul>
+		</div>
 
 		<nav class="fse-pagenav" aria-label="Related pages">
 			<a class="fse-button fse-button--ghost" href="<?php echo esc_url( home_url( '/how-it-works/' ) ); ?>">

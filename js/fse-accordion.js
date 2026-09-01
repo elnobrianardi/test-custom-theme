@@ -1,49 +1,59 @@
 /**
- * 5 Star Eats — UIKit accordion fallback.
+ * 5 Star Eats — Vanilla JS accordion.
  *
- * Provides vanilla-JS open/close behaviour for [uk-accordion]
- * elements when UIKit JS is not loaded (local dev, test env).
- *
- * In production on grab.com, UIKit's own JS handles this component
- * and this script is a no-op because UIKit takes over the attribute.
+ * Toggles items inside a [data-accordion] container.
+ * Clicking an item's summary button collapses/expands its panel by
+ * toggling the .is-open class (and aria-expanded / hidden state).
  *
  * @package _s
  */
 (function () {
 	'use strict';
 
-	// Bail if UIKit JS is already loaded — it handles [uk-accordion].
-	if (typeof UIkit !== 'undefined') {
-		return;
-	}
-
 	document.addEventListener('DOMContentLoaded', function () {
-		var accordions = document.querySelectorAll('[uk-accordion]');
+		const accordions = document.querySelectorAll('[data-accordion]');
 
-		accordions.forEach(function (el) {
-			var items = el.querySelectorAll(':scope > li');
+		accordions.forEach(function (container) {
+			const items = container.querySelectorAll('.fse-accordion-item');
+			const panels = container.querySelectorAll('.fse-accordion-panel');
 
-			items.forEach(function (li) {
-				var title = li.querySelector('.uk-accordion-title, .fse-accordion-title');
-				if (!title) {
+			// Close all panels, then optionally force one open.
+			function setAllClosed() {
+				items.forEach(function (item) {
+					item.classList.remove('is-open');
+				});
+				panels.forEach(function (panel) {
+					panel.classList.add('hidden');
+				});
+			}
+
+			function openItem(item, panel) {
+				setAllClosed();
+				item.classList.add('is-open');
+				panel.classList.remove('hidden');
+			}
+
+			items.forEach(function (item, index) {
+				const button = item.querySelector('.fse-accordion-summary');
+				const panel = panels[index];
+				if (!button || !panel) {
 					return;
 				}
 
-				title.addEventListener('click', function (e) {
-					e.preventDefault();
+				button.addEventListener('click', function () {
+					const isOpen = item.classList.contains('is-open');
 
-					var isOpen = li.classList.contains('uk-open');
-
-					// Close all items in this accordion.
-					items.forEach(function (other) {
-						other.classList.remove('uk-open');
-					});
-
-					// Toggle the clicked item.
-					if (!isOpen) {
-						li.classList.add('uk-open');
+					if (isOpen) {
+						setAllClosed();
+						button.setAttribute('aria-expanded', 'false');
+					} else {
+						openItem(item, panel);
+						button.setAttribute('aria-expanded', 'true');
 					}
 				});
+
+				// Sync aria-expanded with the initial open state.
+				button.setAttribute('aria-expanded', item.classList.contains('is-open') ? 'true' : 'false');
 			});
 		});
 	});

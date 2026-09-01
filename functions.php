@@ -245,5 +245,16 @@ function five_star_eats_scripts() {
 			true
 		);
 	}
+
+	// Carousel — winners page.
+	if ( is_page( 'winners-2025' ) ) {
+		wp_enqueue_script(
+			'fse-carousel',
+			get_template_directory_uri() . '/js/fse-carousel.js',
+			array(),
+			_S_VERSION,
+			true
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'five_star_eats_scripts' );
