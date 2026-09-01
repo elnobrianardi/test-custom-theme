@@ -1,6 +1,6 @@
 /*
- * 5 Star Eats — FAQ / accordion (UIKit uk-accordion).
- * Used on page-faq.php and page-elno.php.
+ * 5 Star Eats — FAQ / accordion (vanilla JS).
+ * Used on page-faq.php.
  */
 
 .fse-accordion {
@@ -18,30 +18,76 @@
 	scroll-margin-top: 5rem;
 }
 
-/* UIKit title — flex row with icon on the right */
-.fse-accordion-title {
-	display: flex !important;
+/* Toggle button — flex row with icon on the right */
+.fse-accordion-summary {
+	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: 1rem;
+	width: 100%;
 	padding: 1rem 1.25rem;
 	font-weight: 600;
 	cursor: pointer;
 	text-decoration: none;
 	color: inherit;
+	background-color: rgba(0, 177, 79, 0.08);
+	border: none;
+	border-radius: 10px;
+	text-align: left;
+	transition: border-radius 0.3s ease;
 }
 
-/* Toggle icon (chevron supplied by uk-accordion-icon) */
+.fse-accordion-item.is-open .fse-accordion-summary {
+	border-radius: 10px 10px 0 0;
+}
+
+.fse-accordion-question {
+	flex: 1 1 auto;
+}
+
+/* Toggle icon (+/-) */
 .fse-accordion-icon {
 	flex: 0 0 auto;
-	width: 1.25rem;
-	height: 1.25rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	font-size: 1.25rem;
+	font-weight: 700;
 	color: var(--fse-green);
-	transition: transform 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.3s ease;
+}
+
+.fse-accordion-icon::before {
+	content: '+';
+	transition: opacity 0.2s ease;
+}
+
+.fse-accordion-item.is-open .fse-accordion-icon {
+	transform: rotate(180deg);
+}
+
+.fse-accordion-item.is-open .fse-accordion-icon::before {
+	content: '−';
 }
 
 /* Content panel */
-.fse-accordion-content {
-	padding: 0 1.25rem 1.25rem;
+.fse-accordion-panel {
+	overflow: hidden;
+	max-height: 0;
+	opacity: 0;
+	padding: 0 1.25rem;
 	color: var(--fse-muted);
+	transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+}
+
+.fse-accordion-item.is-open .fse-accordion-panel {
+	max-height: 500px;
+	opacity: 1;
+	padding: 0 1.25rem 1.25rem;
+}
+
+.fse-accordion-panel-inner {
+	line-height: 1.6;
 }

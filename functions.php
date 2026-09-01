@@ -224,6 +224,16 @@ function five_star_eats_scripts() {
 		'company'      => '5se-company.css',
 	);
 
+	// Carousel — winners page.
+	if ( is_page( 'winners-2025' ) ) {
+		wp_enqueue_style(
+			'five-star-eats-carousel',
+			get_template_directory_uri() . '/css/5se-carousel.css',
+			array( 'five-star-eats' ),
+			_S_VERSION
+		);
+	}
+
 	foreach ( $page_styles as $slug => $file ) {
 		if ( is_page( $slug ) ) {
 			wp_enqueue_style(

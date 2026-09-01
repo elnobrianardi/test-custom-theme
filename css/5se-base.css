@@ -118,3 +118,34 @@
 	text-align: center;
 	margin-bottom: 1.5rem;
 }
+
+/* ------------------------------------------------------------------
+ * Mobile responsive — 8px padding on all pages
+ * ------------------------------------------------------------------ */
+@media (max-width: 600px) {
+	.fse-page {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+
+	.fse-hero {
+		padding: 2rem 0 1.5rem;
+	}
+
+	.fse-title {
+		font-size: 1.75rem;
+	}
+
+	.fse-lede {
+		font-size: 1rem;
+	}
+
+	.fse-button {
+		padding: 0.5rem 1rem;
+		font-size: 0.9rem;
+	}
+
+	.fse-pagenav {
+		gap: 0.5rem;
+	}
+}
