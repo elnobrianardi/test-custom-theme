@@ -28,7 +28,7 @@ $fse_hub_links = array(
 					5 Star Eats
 				</p>
 				<p class="fse-footer-blurb">
-					The definitive index of Malaysia&rsquo;s best restaurants on GrabFood and
+					The definitive index of <?php echo esc_html( five_star_eats_market_name() ); ?>&rsquo;s best restaurants on GrabFood and
 					Dine Out &mdash; awarded purely on real order and rating data.
 				</p>
 			</div>
@@ -43,11 +43,11 @@ $fse_hub_links = array(
 			</nav>
 
 			<div class="fse-footer-col">
-				<h2 class="fse-footer-heading">Grab Malaysia</h2>
+				<h2 class="fse-footer-heading">Grab <?php echo esc_html( five_star_eats_market_name() ); ?></h2>
 				<ul>
-					<li><a href="https://www.grab.com/my/" rel="noopener">grab.com/my</a></li>
-					<li><a href="https://food.grab.com/my/en/" rel="noopener">GrabFood</a></li>
-					<li><a href="https://www.grab.com/my/dine-out/" rel="noopener">Dine Out</a></li>
+					<li><a href="<?php echo esc_url( five_star_eats_site_uri() ); ?>" rel="noopener">grab.com/<?php echo esc_html( five_star_eats_market() ); ?></a></li>
+					<li><a href="<?php echo esc_url( five_star_eats_food_uri() ); ?>" rel="noopener">GrabFood</a></li>
+					<li><a href="<?php echo esc_url( five_star_eats_dine_out_uri() ); ?>" rel="noopener">Dine Out</a></li>
 				</ul>
 			</div>
 
@@ -55,7 +55,7 @@ $fse_hub_links = array(
 
 		<div class="fse-footer-bottom">
 			<div class="fse-footer-bottom-inner">
-				<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> Grab &middot; 5 Star Eats Malaysia</p>
+				<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> Grab &middot; 5 Star Eats <?php echo esc_html( five_star_eats_market_name() ); ?></p>
 			</div>
 		</div>
 	</footer><!-- #colophon -->

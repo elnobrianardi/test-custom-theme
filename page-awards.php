@@ -37,7 +37,7 @@ get_header();
 				<a class="fse-edition-link" href="<?php echo esc_url( home_url( '/winners-2025/' ) ); ?>">
 					<span class="fse-edition-year">2025</span>
 					<span class="fse-edition-name">5 Star Eats 2025 Winners</span>
-					<span class="fse-edition-meta">117 restaurants &middot; Malaysia &middot; Live</span>
+					<span class="fse-edition-meta"><?php echo esc_html( five_star_eats_market_name() ); ?> &middot; Live</span>
 				</a>
 			</li>
 			<li class="fse-edition fse-edition--soon" aria-disabled="true">

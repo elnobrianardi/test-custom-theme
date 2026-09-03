@@ -26,8 +26,9 @@ get_header();
 			<p class="fse-eyebrow">Awards &middot; 2025</p>
 			<h1 class="fse-title"><?php the_title(); ?></h1>
 			<p class="fse-lede">
-				The 117 best restaurants on GrabFood and Dine Out in Malaysia,
-				grouped into 17 categories.
+				The best restaurants on GrabFood and Dine Out in
+				<?php echo esc_html( five_star_eats_market_name() ); ?>,
+				grouped into categories.
 			</p>
 		</section>
 

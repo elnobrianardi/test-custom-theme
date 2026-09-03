@@ -21,10 +21,10 @@ get_header();
 		?>
 
 		<section class="fse-hero">
-			<p class="fse-eyebrow">GrabFood &middot; Malaysia</p>
+			<p class="fse-eyebrow">GrabFood &middot; <?php echo esc_html( five_star_eats_market_name() ); ?></p>
 			<h1 class="fse-title"><?php the_title(); ?></h1>
 			<p class="fse-lede">
-				The definitive list of Malaysia's best restaurants on GrabFood and Dine Out &mdash;
+				The definitive list of <?php echo esc_html( five_star_eats_market_name() ); ?>&rsquo;s best restaurants on GrabFood and Dine Out &mdash;
 				chosen by real orders, not opinions.
 			</p>
 			<div class="fse-hero-actions">

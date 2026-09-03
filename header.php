@@ -33,7 +33,7 @@
 					<span class="fse-brand-mark" aria-hidden="true">&#9733;</span>
 					<span class="fse-brand-text">
 						<span class="site-title">5 Star Eats</span>
-						<span class="site-description">GrabFood &middot; Malaysia</span>
+						<span class="site-description">GrabFood &middot; <?php echo esc_html( five_star_eats_market_name() ); ?></span>
 					</span>
 				</a>
 			</div><!-- .site-branding -->

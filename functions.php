@@ -194,6 +194,7 @@ if ( class_exists( 'WooCommerce' ) ) {
  * page templates: page-5-star-eats.php, page-how-it-works.php,
  * page-faq.php, page-winners-2025.php, page-awards.php, page-company.php.
  */
+require get_template_directory() . '/inc/five-star-eats-market.php';
 require get_template_directory() . '/inc/five-star-eats-winners.php';
 require get_template_directory() . '/inc/five-star-eats-content.php';
 require get_template_directory() . '/inc/five-star-eats-schema.php';

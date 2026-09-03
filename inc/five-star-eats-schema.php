@@ -81,9 +81,10 @@ function five_star_eats_hreflang() {
 		return;
 	}
 
-	$url = five_star_eats_page_url( $slug );
+	$url    = five_star_eats_page_url( $slug );
+	$locale = five_star_eats_locale();
 
-	printf( '<link rel="alternate" hreflang="en-my" href="%s" />' . "\n", esc_url( $url ) );
+	printf( '<link rel="alternate" hreflang="%1$s" href="%2$s" />' . "\n", esc_attr( $locale ), esc_url( $url ) );
 	printf( '<link rel="alternate" hreflang="x-default" href="%s" />' . "\n", esc_url( $url ) );
 }
 add_action( 'wp_head', 'five_star_eats_hreflang', 5 );
@@ -94,14 +95,18 @@ add_action( 'wp_head', 'five_star_eats_hreflang', 5 );
  * @return array<string,mixed>
  */
 function five_star_eats_brand_node() {
-	$hub = five_star_eats_page_url( '5-star-eats' );
+	$hub         = five_star_eats_page_url( '5-star-eats' );
+	$market_name = five_star_eats_market_name();
 
 	return array(
 		'@type'       => 'Brand',
 		'@id'         => $hub . '#brand',
 		'name'        => 'Grab 5 Star Eats',
 		'url'         => $hub,
-		'description' => 'Grab 5 Star Eats recognises the best restaurants on GrabFood and Dine Out in Malaysia, selected purely from order volume and customer rating data.',
+		'description' => sprintf(
+			'Grab 5 Star Eats recognises the best restaurants on GrabFood and Dine Out in %1$s, selected purely from order volume and customer rating data.',
+			$market_name
+		),
 	);
 }
 
@@ -122,7 +127,7 @@ function five_star_eats_webpage_node( $slug, $name, $description, $extra = array
 			'url'         => five_star_eats_page_url( $slug ),
 			'name'        => $name,
 			'description' => $description,
-			'inLanguage'  => 'en-MY',
+			'inLanguage'  => five_star_eats_locale(),
 			'isPartOf'    => array( '@id' => home_url( '/#website' ) ),
 			'publisher'   => array( '@id' => home_url( '/#organization' ) ),
 		),
@@ -152,7 +157,10 @@ function five_star_eats_schema() {
 						five_star_eats_webpage_node(
 							$slug,
 							get_the_title(),
-							'Official index of Grab 5 Star Eats award winners: Malaysia\'s best restaurants on GrabFood and Dine Out, chosen by real order data.',
+							sprintf(
+								'Official index of Grab 5 Star Eats award winners: %1$s\'s best restaurants on GrabFood and Dine Out, chosen by real order data.',
+								five_star_eats_market_name()
+							),
 							array( 'about' => array( '@id' => five_star_eats_page_url( $slug ) . '#brand' ) )
 						),
 					),
@@ -215,7 +223,7 @@ function five_star_eats_schema() {
 						five_star_eats_webpage_node(
 							$slug,
 							get_the_title(),
-							'Learn more about the Grab 5 Star Eats programme and our commitment to celebrating the best restaurants in Malaysia.'
+							'Learn more about the Grab 5 Star Eats programme and our commitment to celebrating the best restaurants in ' . five_star_eats_market_name() . '.'
 						),
 					),
 				)
@@ -259,7 +267,7 @@ function five_star_eats_faq_graph() {
 				'@type'      => 'FAQPage',
 				'@id'        => $page . '#faq',
 				'url'        => $page,
-				'inLanguage' => 'en-MY',
+				'inLanguage' => five_star_eats_locale(),
 				'mainEntity' => $main_entity,
 			),
 		),
@@ -277,6 +285,7 @@ function five_star_eats_winners_graph() {
 	$list_items = array();
 	$businesses = array();
 	$position   = 0;
+	$market_name = five_star_eats_market_name();
 
 	foreach ( five_star_eats_winners() as $category_slug => $category ) {
 		foreach ( $category['winners'] as $winner ) {
@@ -290,18 +299,18 @@ function five_star_eats_winners_graph() {
 				'item'     => array( '@id' => $business_id ),
 			);
 
-			$businesses[] = array(
-				'@type'  => 'LocalBusiness',
-				'@id'    => $business_id,
-				'name'   => $winner[0],
-				'url'    => $page . '#' . $category_slug . '-' . $position,
-				'award'  => 'Grab 5 Star Eats 2025 — ' . $category['label'],
-				'address' => array(
-					'@type'           => 'PostalAddress',
-					'addressLocality' => $winner[1],
-					'addressCountry'  => 'MY',
-				),
-			);
+		$businesses[] = array(
+			'@type'  => 'LocalBusiness',
+			'@id'    => $business_id,
+			'name'   => $winner[0],
+			'url'    => $page . '#' . $category_slug . '-' . $position,
+			'award'  => sprintf( 'Grab 5 Star Eats 2025 — %1$s', $category['label'] ),
+			'address' => array(
+				'@type'           => 'PostalAddress',
+				'addressLocality' => $winner[1],
+				'addressCountry'  => five_star_eats_country_code(),
+			),
+		);
 		}
 	}
 
@@ -312,7 +321,10 @@ function five_star_eats_winners_graph() {
 				five_star_eats_webpage_node(
 					'winners-2025',
 					get_the_title(),
-					'All 117 Grab 5 Star Eats 2025 winners across 17 categories, grouped by cuisine.'
+					sprintf(
+						'All Grab 5 Star Eats 2025 winners across every category, grouped by cuisine — the best restaurants on GrabFood and Dine Out in %1$s.',
+						$market_name
+					)
 				),
 				array(
 					'@type'           => 'ItemList',
