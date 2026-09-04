@@ -269,3 +269,40 @@ function five_star_eats_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'five_star_eats_scripts' );
+
+/**
+ * Prefix URLs with the current market path when it is missing.
+ *
+ * Mirrors grab.com multisite behaviour: market sub-sites (/my, /id) pass
+ * through untouched, while any other URL — including the root and paths
+ * whose first segment is not a valid market — gets the current market
+ * prefix prepended. e.g. /it/awards -> /my/it/awards (which then 404s),
+ * /awards -> /my/awards, / -> /my/.
+ */
+add_action( 'template_redirect', function () {
+	if ( is_admin() ) {
+		return;
+	}
+
+	$request_path = trim( wp_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
+	$market       = five_star_eats_market();
+	$segments     = explode( '/', $request_path );
+	$first        = isset( $segments[0] ) ? strtolower( $segments[0] ) : '';
+
+	if ( '' === $first ) {
+		// Root ("/") -> /my/ (or /id/).
+		wp_safe_redirect( home_url( '/' . $market . '/' ), 301 );
+		exit;
+	}
+
+	$markets = five_star_eats_markets();
+	if ( isset( $markets[ $first ] ) ) {
+		// Valid market sub-site (e.g. /my/..., /id/...) — leave as is.
+		return;
+	}
+
+	// Missing market prefix — prepend it (e.g. /awards -> /my/awards).
+	$target = $market . '/' . $request_path;
+	wp_safe_redirect( home_url( '/' . $target . '/' ), 301 );
+	exit;
+} );
