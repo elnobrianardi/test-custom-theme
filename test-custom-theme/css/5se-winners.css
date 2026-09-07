@@ -1,0 +1,123 @@
+/*
+ * 5 Star Eats — winners list & jump navigation.
+ * Used only on page-winners-2025.php.
+ */
+
+/* Jump navigation (winners) */
+.fse-jumpnav {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background-color: #fff;
+	border-block: 1px solid var(--fse-border);
+	padding: 0.75rem 0;
+	margin: 2rem 0;
+}
+
+.fse-jumpnav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	justify-content: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.fse-jumpnav a {
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: var(--fse-dark);
+	text-decoration: none;
+}
+
+.fse-jumpnav a:hover,
+.fse-jumpnav a:focus {
+	color: var(--fse-green);
+	text-decoration: underline;
+}
+
+/* Category sections need scroll offset because of the sticky nav. */
+.fse-category {
+	scroll-margin-top: 5rem;
+	max-width: 900px;
+	margin: 2.5rem auto;
+}
+
+.fse-category-title {
+	display: flex;
+	align-items: baseline;
+	gap: 0.75rem;
+	border-bottom: 2px solid var(--fse-green);
+	padding-bottom: 0.5rem;
+}
+
+.fse-category-count {
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: var(--fse-muted);
+}
+
+/* Winner list */
+.fse-winner-list {
+	list-style: none;
+	margin: 1rem 0 0;
+	padding: 0;
+	counter-reset: none;
+}
+
+.fse-winner {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.9rem 0.5rem;
+	border-bottom: 1px solid var(--fse-border);
+}
+
+.fse-winner-rank {
+	flex: 0 0 2rem;
+	height: 2rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background-color: var(--fse-green);
+	color: #fff;
+	font-weight: 700;
+	font-size: 0.9rem;
+}
+
+.fse-winner-info {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.fse-winner-name {
+	display: block;
+	font-weight: 600;
+}
+
+.fse-winner-location {
+	display: block;
+	font-size: 0.9rem;
+	color: var(--fse-muted);
+}
+
+.fse-winner-order {
+	flex: 0 0 auto;
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: var(--fse-green);
+	text-decoration: none;
+}
+
+.fse-winner-order:hover,
+.fse-winner-order:focus {
+	text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+	.fse-winner-order {
+		display: none;
+	}
+}

@@ -1,0 +1,93 @@
+/*
+ * 5 Star Eats — FAQ / accordion (vanilla JS).
+ * Used on page-faq.php.
+ */
+
+.fse-accordion {
+	max-width: 720px;
+	margin: 2rem auto;
+	list-style: none;
+	padding: 0;
+}
+
+.fse-accordion-item {
+	border: 1px solid var(--fse-border);
+	border-radius: 10px;
+	margin-bottom: 0.75rem;
+	background-color: #fff;
+	scroll-margin-top: 5rem;
+}
+
+/* Toggle button — flex row with icon on the right */
+.fse-accordion-summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	width: 100%;
+	padding: 1rem 1.25rem;
+	font-weight: 600;
+	cursor: pointer;
+	text-decoration: none;
+	color: inherit;
+	background-color: rgba(27, 63, 139, 0.08);
+	border: none;
+	border-radius: 10px;
+	text-align: left;
+	transition: border-radius 0.3s ease;
+}
+
+.fse-accordion-item.is-open .fse-accordion-summary {
+	border-radius: 10px 10px 0 0;
+}
+
+.fse-accordion-question {
+	flex: 1 1 auto;
+}
+
+/* Toggle icon (+/-) */
+.fse-accordion-icon {
+	flex: 0 0 auto;
+	width: 1.5rem;
+	height: 1.5rem;
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--fse-green);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.3s ease;
+}
+
+.fse-accordion-icon::before {
+	content: '+';
+	transition: opacity 0.2s ease;
+}
+
+.fse-accordion-item.is-open .fse-accordion-icon {
+	transform: rotate(180deg);
+}
+
+.fse-accordion-item.is-open .fse-accordion-icon::before {
+	content: '−';
+}
+
+/* Content panel */
+.fse-accordion-panel {
+	overflow: hidden;
+	max-height: 0;
+	opacity: 0;
+	padding: 0 1.25rem;
+	color: var(--fse-muted);
+	transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+}
+
+.fse-accordion-item.is-open .fse-accordion-panel {
+	max-height: 500px;
+	opacity: 1;
+	padding: 0 1.25rem 1.25rem;
+}
+
+.fse-accordion-panel-inner {
+	line-height: 1.6;
+}

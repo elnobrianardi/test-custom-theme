@@ -1,0 +1,167 @@
+/*
+ * 5 Star Eats AEO Hub — shared base styles.
+ *
+ * Plain CSS, no build step. Loaded on every hub page; see
+ * five_star_eats_scripts() in functions.php. Page-specific styles
+ * live in their own files (5se-signals.css, 5se-winners.css, etc).
+ */
+
+/* ------------------------------------------------------------------
+ * Header — center nav horizontally
+ * ------------------------------------------------------------------ */
+.fse-header-inner {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+}
+
+.site-branding {
+	justify-self: start;
+}
+
+.main-navigation {
+	justify-self: center;
+}
+
+/* ------------------------------------------------------------------
+ * Hero
+ * ------------------------------------------------------------------ */
+.fse-page {
+	--fse-green: #1B3F8B;
+	--fse-dark: #1a1a1a;
+	--fse-muted: #575757;
+	--fse-border: #e6e6e6;
+}
+
+.fse-page .fse-hero {
+	position: relative;
+	padding-top: 3.5rem;
+}
+
+.fse-page .fse-hero::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 4.5rem;
+	height: 0.375rem;
+	background: var(--fse-green);
+	border-radius: 999px;
+}
+
+.fse-hero {
+	padding: 3rem 0 2rem;
+	max-width: 640px;
+	margin-inline: 0;
+	text-align: left;
+}
+
+.fse-eyebrow {
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--fse-green);
+	margin-bottom: 0.75rem;
+}
+
+.fse-title {
+	font-size: clamp(2.25rem, 5.5vw, 3.5rem);
+	line-height: 1.1;
+	margin-bottom: 1rem;
+}
+
+.fse-lede {
+	font-size: 1.125rem;
+	color: var(--fse-muted);
+	margin-bottom: 1.5rem;
+}
+
+.fse-hero-actions,
+.fse-pagenav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	justify-content: flex-start;
+}
+
+.fse-pagenav {
+	margin: 2.5rem 0;
+}
+
+/* ------------------------------------------------------------------
+ * Buttons
+ * ------------------------------------------------------------------ */
+.fse-button {
+	display: inline-block;
+	padding: 0.65rem 1.4rem;
+	border-radius: 999px;
+	font-weight: 600;
+	text-decoration: none;
+	border: 2px solid var(--fse-green);
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.fse-button--primary {
+	background-color: var(--fse-green);
+	color: #fff;
+}
+
+.fse-button--primary:hover,
+.fse-button--primary:focus {
+	background-color: #13306B;
+	color: #fff;
+}
+
+.fse-button--ghost {
+	background-color: transparent;
+	color: var(--fse-green);
+}
+
+.fse-button--ghost:hover,
+.fse-button--ghost:focus {
+	background-color: rgba(27, 63, 139, 0.08);
+}
+
+/* ------------------------------------------------------------------
+ * Prose
+ * ------------------------------------------------------------------ */
+.fse-prose {
+	max-width: 720px;
+	margin-inline: auto;
+}
+
+.fse-section-title {
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+
+/* ------------------------------------------------------------------
+ * Mobile responsive — 8px padding on all pages
+ * ------------------------------------------------------------------ */
+@media (max-width: 600px) {
+	.fse-page {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+
+	.fse-hero {
+		padding: 2rem 0 1.5rem;
+	}
+
+	.fse-title {
+		font-size: 1.75rem;
+	}
+
+	.fse-lede {
+		font-size: 1rem;
+	}
+
+	.fse-button {
+		padding: 0.5rem 1rem;
+		font-size: 0.9rem;
+	}
+
+	.fse-pagenav {
+		gap: 0.5rem;
+	}
+}
