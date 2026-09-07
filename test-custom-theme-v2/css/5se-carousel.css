@@ -37,7 +37,7 @@
 
 .fse-carousel-category {
 	font-size: 0.875rem;
-	color: var(--fse-green);
+	color: var(--fse-blue);
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
@@ -64,9 +64,9 @@
 	width: 3rem;
 	height: 3rem;
 	border-radius: 50%;
-	border: 2px solid var(--fse-green);
+	border: 2px solid var(--fse-blue);
 	background: #fff;
-	color: var(--fse-green);
+	color: var(--fse-blue);
 	font-size: 1.5rem;
 	cursor: pointer;
 	display: flex;
@@ -77,7 +77,7 @@
 }
 
 .fse-carousel-btn:hover:not(:disabled) {
-	background: var(--fse-green);
+	background: var(--fse-blue);
 	color: #fff;
 }
 

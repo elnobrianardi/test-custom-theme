@@ -18,7 +18,7 @@
 	display: block;
 	padding: 1.25rem 1.5rem;
 	border: 1px solid var(--fse-border);
-	border-left: 5px solid var(--fse-green);
+	border-left: 5px solid var(--fse-blue);
 	border-radius: 10px;
 	text-decoration: none;
 	color: inherit;
@@ -41,7 +41,7 @@
 	display: block;
 	font-size: 1.4rem;
 	font-weight: 800;
-	color: var(--fse-green);
+	color: var(--fse-blue);
 }
 
 .fse-edition-name {

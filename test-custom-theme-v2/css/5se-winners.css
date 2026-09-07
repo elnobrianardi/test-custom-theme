@@ -33,7 +33,7 @@
 
 .fse-jumpnav a:hover,
 .fse-jumpnav a:focus {
-	color: var(--fse-green);
+	color: var(--fse-blue);
 	text-decoration: underline;
 }
 
@@ -48,7 +48,7 @@
 	display: flex;
 	align-items: baseline;
 	gap: 0.75rem;
-	border-bottom: 2px solid var(--fse-green);
+	border-bottom: 2px solid var(--fse-blue);
 	padding-bottom: 0.5rem;
 }
 
@@ -81,7 +81,7 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
-	background-color: var(--fse-green);
+	background-color: var(--fse-blue);
 	color: #fff;
 	font-weight: 700;
 	font-size: 0.9rem;
@@ -107,7 +107,7 @@
 	flex: 0 0 auto;
 	font-size: 0.85rem;
 	font-weight: 600;
-	color: var(--fse-green);
+	color: var(--fse-blue);
 	text-decoration: none;
 }
 
