@@ -271,13 +271,14 @@ function five_star_eats_scripts() {
 add_action( 'wp_enqueue_scripts', 'five_star_eats_scripts' );
 
 /**
- * Prefix URLs with the current market path when it is missing.
+ * Route by market path prefix (mirrors grab.com multisite behaviour).
  *
- * Mirrors grab.com multisite behaviour: market sub-sites (/my, /id) pass
- * through untouched, while any other URL — including the root and paths
- * whose first segment is not a valid market — gets the current market
- * prefix prepended. e.g. /it/awards -> /my/it/awards (which then 404s),
- * /awards -> /my/awards, / -> /my/.
+ * - Root / -> redirect to the default market (/id/).
+ * - Valid market sub-site (/my/..., /id/...) -> pass through.
+ * - First segment is a 2-letter country code that is not a valid market
+ *   (e.g. /it/...) -> 404 (unknown market).
+ * - Any other path (no market prefix, e.g. /awards) -> redirect to the
+ *   default market (/id/awards).
  */
 add_action( 'template_redirect', function () {
 	if ( is_admin() ) {
@@ -289,20 +290,29 @@ add_action( 'template_redirect', function () {
 	$segments     = explode( '/', $request_path );
 	$first        = isset( $segments[0] ) ? strtolower( $segments[0] ) : '';
 
+	// Root ("/") -> /id/ (or whatever the default market is).
 	if ( '' === $first ) {
-		// Root ("/") -> /my/ (or /id/).
 		wp_safe_redirect( home_url( '/' . $market . '/' ), 301 );
 		exit;
 	}
 
 	$markets = five_star_eats_markets();
+
+	// Valid market sub-site (/my/..., /id/...) — leave as is.
 	if ( isset( $markets[ $first ] ) ) {
-		// Valid market sub-site (e.g. /my/..., /id/...) — leave as is.
 		return;
 	}
 
-	// Missing market prefix — prepend it (e.g. /awards -> /my/awards).
-	$target = $market . '/' . $request_path;
-	wp_safe_redirect( home_url( '/' . $target . '/' ), 301 );
+	// Two-letter first segment that isn't a valid market = unknown country -> 404.
+	if ( 2 === strlen( $first ) && ! is_numeric( $first ) ) {
+		global $wp_query;
+		$wp_query->set_404();
+		status_header( 404 );
+		nocache_headers();
+		return;
+	}
+
+	// No market prefix (e.g. /awards) -> prepend default market.
+	wp_safe_redirect( home_url( '/' . $market . '/' . $request_path . '/' ), 301 );
 	exit;
 } );

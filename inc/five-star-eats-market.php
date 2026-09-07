@@ -99,7 +99,7 @@ function five_star_eats_market() {
 		return $detected;
 	}
 
-	return 'my';
+	return 'id';
 }
 
 /**
